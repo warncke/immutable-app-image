@@ -1,0 +1,25 @@
+{
+  "author": "Ersun Warncke <ersun.warncke@gmail.com>",
+  "dependencies": {
+  },
+  "description": "Immutable app image module",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "mocha": "3.3.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "license": "MIT",
+  "main": "lib/immutable-app-image.js",
+  "name": "immutable-app-image",
+  "repository": "warncke/immutable-app-image",
+  "scripts": {
+    "test": "mocha"
+  },
+  "version": "0.0.1"
+}
