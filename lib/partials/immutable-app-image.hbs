@@ -1,0 +1,102 @@
+<div id="{{imageElmId}}-wrapper" class="{{imageElmClass}}-wrapper">
+
+    <div class="cropper hide">
+
+        <div class="image-wrapper margin-b-m">
+            <img class="image" src="" />
+        </div>
+     
+        <div class="controls pad-b-m">
+            <button type="button" class="drag-mode-move">
+                <span class="fa fa-arrows"></span>
+            </button>
+            <button type="button" class="drag-mode-crop margin-r-s">
+                <span class="fa fa-crop"></span>
+            </button>
+
+            <button type="button" class="zoom-in">
+                <span class="fa fa-search-plus"></span>
+            </button>
+            <button type="button" class="zoom-out margin-r-s">
+                <span class="fa fa-search-minus"></span>
+            </button>
+
+            <button type="button" class="move-left">
+                <span class="fa fa-arrow-left"></span>
+            </button>
+            <button type="button" class="move-right">
+                <span class="fa fa-arrow-right"></span>
+            </button>
+            <button type="button" class="move-up">
+                <span class="fa fa-arrow-up"></span>
+            </button>
+            <button type="button" class="move-down margin-r-s">
+                <span class="fa fa-arrow-down"></span>
+            </button>
+
+            <button type="button" class="shower margin-r-s">
+                <span class="fa fa-rotate-left"></span>
+                <input type="text" size="3" class="inline hide rotate" />
+            </button>
+
+            <button type="button" class="flip-h">
+                <span class="fa fa-arrows-h"></span>
+            </button>
+            <button type="button" class="flip-v margin-r-s">
+                <span class="fa fa-arrows-v"></span>
+            </button>
+
+            <button type="button" class="reset margin-r-s">
+                <span class="fa fa-refresh"></span>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="input">
+
+        {{#if immutableAppImageImageType}}
+        <input type="hidden" value="{{immutableAppImageImageType}}" class="select-image-type" />
+        {{else}}
+        <div class="fl pad-r-s">
+            <select class="select-image-type">
+                <option value="">Image Type</option>
+                {{#each imageTypes}}
+                <option value="{{id}}">{{data.imageTypeName}}</option>
+                {{/each}}
+            </select>
+        </div>
+        {{/if}}
+
+        <div class="fl">
+            <input type="file" name="file" class="select-image" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp">
+
+            <span class="image-upload hide">
+
+                <input type="text" name="imageName" class="image-name-input" placeholder="Image Name" />
+
+                <button type="button" class="clear-file">
+                    <span class="fa fa-close"></span>
+                </button>
+
+                <button type="button" class="upload margin-r-s">
+                    <span class="fa fa-upload"></span>
+                </button>
+
+            </span>
+
+            <progress class="hide progress"></progress>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var immutableAppImage = new ImmutableAppImage({
+        imageElmId: '{{imageElmId}}',
+        imageElmClass: '{{imageElmClass}}',
+        imageTypes: {{{JSONstringify imageTypes}}},
+        imageType: '{{immutableAppImageImageType}}',
+    })
+</script>
