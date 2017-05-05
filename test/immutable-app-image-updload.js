@@ -64,6 +64,7 @@ describe('immutable-app-image-upload', function () {
         imageProfileModel.database(database)
         imageTypeModel.database(database)
         // sync models
+        await imageModel.sync()
         await imageProfileModel.sync()
         await imageTypeModel.sync()
         // create new immutable ai instance
@@ -376,7 +377,7 @@ describe('immutable-app-image-upload', function () {
         var image = await immutableAppImageUpload.process()
     })
 
-    it('should scale image to specific height maintaining aspect ratio', async function () {
+    it('should scale image to specific width maintaining aspect ratio', async function () {
         // validate output
         fsMock.writeFile = async (file, buffer) => {
             // load buffer to get meta data
@@ -403,7 +404,7 @@ describe('immutable-app-image-upload', function () {
         var image = await immutableAppImageUpload.process()
     })
 
-    it('should scale image to specific height and aspect ratio', async function () {
+    it('should scale image to specific width and aspect ratio', async function () {
         // validate output
         fsMock.writeFile = async (file, buffer) => {
             // load buffer to get meta data
@@ -458,7 +459,7 @@ describe('immutable-app-image-upload', function () {
         var image = await immutableAppImageUpload.process()
     })
 
-    it('should scale image to specific height and aspect ratio', async function () {
+    it('should scale image to max width and aspect ratio', async function () {
         // validate output
         fsMock.writeFile = async (file, buffer) => {
             // load buffer to get meta data
@@ -484,6 +485,356 @@ describe('immutable-app-image-upload', function () {
         })
         // process image
         var image = await immutableAppImageUpload.process()
+    })
+
+    it('should scale image to max height maintaining aspect ratio', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 10)
+            assert.strictEqual(meta.width, 10)
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+            maxHeight: 10,
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should scale image to max height and aspect ratio', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 8, 'heigth')
+            assert.strictEqual(meta.width, 10, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            aspectRatio: 1.3333333,
+            fileType: 'png',
+            imageTypeName: 'test',
+            maxWidth: 10,
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with x,y offset', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 15, 'heigth')
+            assert.strictEqual(meta.width, 15, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {x: 5, y: 5} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with x offset', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 20, 'heigth')
+            assert.strictEqual(meta.width, 15, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {x: 5} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with y offset', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 15, 'heigth')
+            assert.strictEqual(meta.width, 20, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {y: 5} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with height and width', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 10, 'heigth')
+            assert.strictEqual(meta.width, 10, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {height: 10, width: 10} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with height', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 10, 'heigth')
+            assert.strictEqual(meta.width, 20, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {height: 10} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with width', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 20, 'heigth')
+            assert.strictEqual(meta.width, 10, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {width: 10} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should crop image with x,y offset, height and width', async function () {
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            // load buffer to get meta data
+            var meta = await sharp(buffer).metadata()
+            // check type and dimensions
+            assert.strictEqual(meta.format, 'png')
+            assert.strictEqual(meta.height, 10, 'heigth')
+            assert.strictEqual(meta.width, 10, 'width')
+        }
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'png',
+            imageTypeName: 'test',
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            meta: { cropData: {x: 5, y: 5, height: 10, width: 10} },
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+    })
+
+    it('should create variants with pregenerate=true', async function () {
+        // keep track of calls
+        var call = 0;
+        // list of variants
+        var variants = []
+        // validate output
+        fsMock.writeFile = async (file, buffer) => {
+            if (call === 0) {
+                // check file name extension
+                assert.ok(file.match(/\.jpg$/))
+                // load buffer to get meta data
+                var meta = await sharp(buffer).metadata()
+                // check type and dimensions
+                assert.strictEqual(meta.format, 'jpeg')
+                assert.strictEqual(meta.height, 20)
+                assert.strictEqual(meta.width, 20)
+            }
+            else if (call > 0) {
+                // load buffer to get meta data
+                var meta = await sharp(buffer).metadata()
+                // check dimensions
+                assert.strictEqual(meta.height, 10)
+                assert.strictEqual(meta.width, 10)
+                // add format to list of variants
+                variants.push(meta.format)
+            }
+            // increment call count
+            call++
+        }
+        // create first image profile
+        var imageProfile1 = await ai.model.imageProfile.create({
+            fileType: 'webp',
+            imageProfileName: 'small-webp',
+            maxHeight: 10,
+            maxWidth: 10,
+            pregenerate: true,
+        })
+        // create second image profile
+        var imageProfile2 = await ai.model.imageProfile.create({
+            fileType: 'jpg',
+            imageProfileName: 'small-jpg',
+            maxHeight: 10,
+            maxWidth: 10,
+            pregenerate: true,
+        })
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'jpg',
+            imageTypeName: 'test',
+            height: 20,
+            width: 20,
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            imageProfiles: [imageProfile1, imageProfile2],
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+        // check call count
+        assert.strictEqual(call, 3, 'writeFile')
+        // check variants created
+        assert.deepEqual(variants.sort(), ['jpeg', 'webp'])
+    })
+
+    it('should not create variants with pregenerate=false', async function () {
+        // create first image profile
+        var imageProfile1 = await ai.model.imageProfile.create({
+            fileType: 'webp',
+            imageProfileName: 'small-webp',
+            maxHeight: 10,
+            maxWidth: 10,
+            pregenerate: false,
+        })
+        // create second image profile
+        var imageProfile2 = await ai.model.imageProfile.create({
+            fileType: 'jpg',
+            imageProfileName: 'small-jpg',
+            maxHeight: 10,
+            maxWidth: 10,
+            pregenerate: false,
+        })
+        // create image type matching test image
+        var imageType = await ai.model.imageType.create({
+            fileType: 'jpg',
+            imageTypeName: 'test',
+            height: 20,
+            width: 20,
+        })
+        // create upload instance
+        var immutableAppImageUpload = new ImmutableAppImageUpload({
+            ai: ai,
+            buffer: testImage,
+            imageProfiles: [imageProfile1, imageProfile2],
+            imageType: imageType,
+            session: session,
+        })
+        // process image
+        var image = await immutableAppImageUpload.process()
+        // check call count
+        sinon.assert.calledOnce(fsMock.writeFile)
     })
 
 })
