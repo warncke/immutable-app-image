@@ -3,8 +3,8 @@
   "dependencies": {
     "change-case": "3.0.1",
     "if-defined": "1.0.1",
-    "immutable-app": "0.6.1",
-    "immutable-core-model-form": "0.6.12",
+    "immutable-app": "0.6.2",
+    "immutable-core-model-form": "0.6.13",
     "immutable-database-mariasql": "1.2.18",
     "immutable-require-valid-optional-object": "0.1.2",
     "lodash": "4.17.4",
@@ -38,5 +38,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.0.12"
+  "version": "0.0.13"
 }
