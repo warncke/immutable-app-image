@@ -737,8 +737,9 @@ describe('immutable-app-image-upload', function () {
         // list of variants
         var variants = []
         // validate output
-        fsMock.writeFile = async (file, buffer) => {
+        fsMock.writeFile = async function (file, buffer) {
             if (call === 0) {
+                call++
                 // check file name extension
                 assert.ok(file.match(/\.jpg$/))
                 // load buffer to get meta data
@@ -748,7 +749,8 @@ describe('immutable-app-image-upload', function () {
                 assert.strictEqual(meta.height, 20)
                 assert.strictEqual(meta.width, 20)
             }
-            else if (call > 0) {
+            else {
+                call++
                 // load buffer to get meta data
                 var meta = await sharp(buffer).metadata()
                 // check dimensions
@@ -757,8 +759,6 @@ describe('immutable-app-image-upload', function () {
                 // add format to list of variants
                 variants.push(meta.format)
             }
-            // increment call count
-            call++
         }
         // create first image profile
         var imageProfile1 = await ai.model.imageProfile.create({
