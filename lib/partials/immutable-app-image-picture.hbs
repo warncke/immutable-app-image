@@ -1,0 +1,6 @@
+<picture>
+    {{#each source}}
+    <source srcset="{{{srcset}}}" type="{{type}}">
+    {{/each}}
+    <img id="image-{{iamgeId}}" src="{{{src}}}" alt="{{imageName}}">
+</picture>

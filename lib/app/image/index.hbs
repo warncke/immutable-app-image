@@ -1,1 +1,11 @@
-XXX
+{{#each images}}
+    {{#gt ../images.length 1}}
+        <h2>{{title}}</h2>
+        <hr>
+    {{/gt}}
+    <div class="pure-g">
+    {{#each images}}
+        {{>immutable-app-image-thumbnail}}
+    {{/each}}
+    </div>
+{{/each}}

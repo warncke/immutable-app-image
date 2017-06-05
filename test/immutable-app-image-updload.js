@@ -78,6 +78,7 @@ describe('immutable-app-image-upload', function () {
         // configure ImmutableAppImage with fs
         ImmutableAppImage.config({
             fs: fsMock,
+            pathProperty: 'accountId',
         })
     })
 
