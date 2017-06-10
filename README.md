@@ -101,24 +101,11 @@ One or more Image Profiles can be linked to an Image Type.
 The `name` for a profile must be in param case: i.e. lower case, dashes, and no
 spaces.
 
-If the `preGenerate` property is set then when an image is uploaded a version
+If the `pregenerate` property is set then when an image is uploaded a version
 of for the Image Profile will be created.
 
 Pre-generated images are stored with the profile name afer the id and before the
 fileType like: "my-vacation-8449328a1eedfd27b1214d7d4fb16315-thumbnail.jpg".
 
-### Image Album
-
-Property name   | Description                                                  |
-----------------|--------------------------------------------------------------|
-name            | string album name                                            |
-description     | string album description                                     |
-imageTypeId     | id for Image Type                                            |
-
-Albums allow users to categorize images.
-
-Albums can only contain images of the same Image Type.
-
-Presentation of Images to users is based on a 3-level structure where the first
-level is Image Type, the 2nd level is images that have not been assigned to an
-album, and the 3rd level is images for a particular album.
+To support webp multiple profiles with the same name should be created. One of
+these profiles should be either jpg or png and the either should be webp.
