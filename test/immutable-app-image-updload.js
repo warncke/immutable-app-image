@@ -111,11 +111,15 @@ describe('immutable-app-image-upload', function () {
             imageTypeId: imageType.id,
             path: session.accountId,
         })
+
         // build expected file name
         var expectedFileName = image.data.path+'/'+image.data.fileName+'-'+image.id+'.'+image.data.fileType
         // check that writeFile called with original buffer
         sinon.assert.calledOnce(fsMock.writeFile)
-        sinon.assert.calledWithMatch(fsMock.writeFile, expectedFileName, testImage)
+        sinon.assert.calledWithMatch(fsMock.writeFile, expectedFileName, await immutableAppImageUpload.sharp.png({
+            compressionLevel: 9,
+            force: true,
+        }).toBuffer())
     })
 
     it('should set fileName and imageName based on meta fileName', async function () {
