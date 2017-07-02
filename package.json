@@ -3,14 +3,14 @@
   "dependencies": {
     "change-case": "3.0.1",
     "if-defined": "1.0.8",
-    "immutable-app": "0.8.22",
+    "immutable-app": "0.8.23",
     "immutable-core-model-form": "0.7.15",
     "immutable-database-mariasql": "1.3.11",
     "immutable-require-valid-optional-object": "0.1.8",
     "lodash": "4.17.4",
     "merge-args": "0.2.8",
     "multer": "1.3.0",
-    "sharp": "0.18.1"
+    "sharp": "0.18.2"
   },
   "description": "Immutable app image module",
   "devDependencies": {
@@ -23,7 +23,7 @@
     "immutable-core": "1.4.16",
     "immutable-core-model": "2.2.2",
     "mocha": "3.4.2",
-    "sinon": "2.3.5"
+    "sinon": "2.3.6"
   },
   "directories": {
     "test": "test"
@@ -38,5 +38,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.5"
+  "version": "0.3.6"
 }
