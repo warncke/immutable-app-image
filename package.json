@@ -15,13 +15,13 @@
   "description": "Immutable app image module",
   "devDependencies": {
     "chai": "4.0.2",
-    "chai-as-promised": "7.0.0",
+    "chai-as-promised": "7.1.0",
     "gcsfs": "0.1.9",
     "immutable-access-control": "0.4.7",
     "immutable-ai": "0.5.0",
     "immutable-app-auth": "0.5.23",
     "immutable-core": "1.4.17",
-    "immutable-core-model": "2.2.3",
+    "immutable-core-model": "2.3.1",
     "mocha": "3.4.2",
     "sinon": "2.3.6"
   },
@@ -38,5 +38,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.3.13"
+  "version": "0.3.14"
 }
