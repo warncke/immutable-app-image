@@ -1,7 +1,7 @@
 # immutable-app-image
 
 Immutable App Image is an
-[immutable-app](https://www.npmjs.com/package/immutable-app) module that
+[Immutable App](https://www.npmjs.com/package/immutable-app) module that
 provides image upload, editing and storage functionality.
 
 Immutable App Image uses [Cropper.js](https://github.com/fengyuanchen/cropperjs)
@@ -11,6 +11,13 @@ to crop images on the client side prior to uploading and
 Images are stored via an [mz/fs](https://www.npmjs.com/package/mz) compatible
 file system which can be the local file system or a remote virtual file system
 such as [gcsfs](https://www.npmjs.com/package/gcsfs).
+
+## Immutable App Image v0.3 and Immutable Core Model v3
+
+Immutable App Image v0.3 is required to support the breaking changes that were made
+in Immutable Core Model v3.
+
+Immutable App Image v0.3 is not compatible with Imutable Core Model v2.
 
 ## Image Schema
 
