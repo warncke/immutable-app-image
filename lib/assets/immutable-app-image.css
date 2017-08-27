@@ -45,3 +45,17 @@
 .immutable-app-image-grid .image-name {
     font-weight: bold;
 }
+
+.immutable-app-image-upload-modal {
+    position: fixed;
+    top: 0; right: 0;
+    width: 100%; height: 100%;
+    background-color: white;
+    overflow: auto;
+}
+
+.immutable-app-image-upload-modal-close {
+    position: absolute;
+    top: 0; right: 0;
+    margin: 10px;
+}

@@ -1,0 +1,114 @@
+<div id="immutable-app-image-upload-modal-template" class="immutable-app-image-upload-modal hide">
+
+    <div class="immutable-app-image-upload-modal-header pad-l-m pad-r-m">
+        <div class="immutable-app-image-upload-modal-close">
+            <a onclick="ImmutableAppImage.hideUploadImage(this)">
+                <span class="fa fa-2x fa-close"></span>
+            </a>
+        </div>
+
+        <h2>Upload Image</h2>            
+    </div>
+
+    <div class="immutable-app-image-upload-wrapper pad-l-m pad-r-m">
+
+        <div class="cropper hide">
+
+            <div class="image-wrapper margin-b-m">
+                <img class="image" src="" />
+            </div>
+         
+            <div class="controls pad-b-m">
+                <button type="button" class="drag-mode-move">
+                    <span class="fa fa-arrows"></span>
+                </button>
+                <button type="button" class="drag-mode-crop margin-r-s">
+                    <span class="fa fa-crop"></span>
+                </button>
+
+                <button type="button" class="zoom-in">
+                    <span class="fa fa-search-plus"></span>
+                </button>
+                <button type="button" class="zoom-out margin-r-s">
+                    <span class="fa fa-search-minus"></span>
+                </button>
+
+                <button type="button" class="move-left">
+                    <span class="fa fa-arrow-left"></span>
+                </button>
+                <button type="button" class="move-right">
+                    <span class="fa fa-arrow-right"></span>
+                </button>
+                <button type="button" class="move-up">
+                    <span class="fa fa-arrow-up"></span>
+                </button>
+                <button type="button" class="move-down margin-r-s">
+                    <span class="fa fa-arrow-down"></span>
+                </button>
+
+                <button type="button" class="shower margin-r-s">
+                    <span class="fa fa-rotate-left"></span>
+                    <input type="text" size="3" class="inline hide rotate" />
+                </button>
+
+                <button type="button" class="flip-h">
+                    <span class="fa fa-arrows-h"></span>
+                </button>
+                <button type="button" class="flip-v margin-r-s">
+                    <span class="fa fa-arrows-v"></span>
+                </button>
+
+                <button type="button" class="reset margin-r-s">
+                    <span class="fa fa-refresh"></span>
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="input">
+            <input type="hidden" value="" class="select-image-type" />
+
+            <div class="fl pad-r-s">
+                <select class="select-image-type">
+                    <option value="">Image Type</option>
+                    {{#each immutableAppImage.imageTypes}}
+                    <option value="{{id}}">{{data.imageTypeName}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="fl">
+                <input type="file" name="file" class="select-image" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp">
+
+                <span class="image-upload hide">
+
+                    <input type="text" name="imageName" class="image-name-input" placeholder="Image Name" />
+
+                    <button type="button" class="clear-file">
+                        <span class="fa fa-close"></span>
+                    </button>
+
+                    <button type="button" class="upload margin-r-s">
+                        <span class="fa fa-upload"></span>
+                    </button>
+
+                    <label>
+                        <input class="uploadOriginal" type="checkbox" />
+                        Upload Original
+                    </label>
+
+                </span>
+
+                <progress class="hide progress"></progress>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    ImmutableAppImage.globalImageTypes({{{JSONstringify immutableAppImage.imageTypes}}})
+    ImmutableAppImage.globalUploadPath('{{{immutableAppImage.uploadPath}}}')
+</script>
