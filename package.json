@@ -17,7 +17,7 @@
   "devDependencies": {
     "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
-    "gcsfs": "0.1.18",
+    "gcsfs": "0.1.19",
     "immutable-access-control": "0.5.7",
     "immutable-ai": "0.6.2",
     "immutable-app-auth": "0.8.8",
@@ -39,5 +39,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.4.89"
+  "version": "0.4.90"
 }
