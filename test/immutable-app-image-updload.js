@@ -792,7 +792,7 @@ describe('immutable-app-image-upload', function () {
         var immutableAppImageUpload = new ImmutableAppImageUpload({
             ai: ai,
             buffer: testImage,
-            imageProfiles: [imageProfile1, imageProfile2],
+            imageProfiles: [imageProfile1.data, imageProfile2.data],
             imageType: imageType,
             session: session,
         })
@@ -832,7 +832,7 @@ describe('immutable-app-image-upload', function () {
         var immutableAppImageUpload = new ImmutableAppImageUpload({
             ai: ai,
             buffer: testImage,
-            imageProfiles: [imageProfile1, imageProfile2],
+            imageProfiles: [imageProfile1.data, imageProfile2.data],
             imageType: imageType,
             session: session,
         })
