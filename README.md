@@ -12,6 +12,13 @@ Images are stored via an [mz/fs](https://www.npmjs.com/package/mz) compatible
 file system which can be the local file system or a remote virtual file system
 such as [gcsfs](https://www.npmjs.com/package/gcsfs).
 
+Immutable App Image uses
+[Immutable Core Service](https://www.npmjs.com/package/immutable-core-service)
+to persist image type and image profile data globally. This data is used
+whenever images are displayed or uploaded. By default this data will be
+refreshed every 60 seconds so changes to image types and image profiles will
+not be reflected by application clients for up to 60 seconds.
+
 ## Immutable App Image v0.3 and Immutable Core Model v3
 
 Immutable App Image v0.3 is required to support the breaking changes that were made
