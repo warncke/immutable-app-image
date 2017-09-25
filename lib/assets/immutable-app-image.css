@@ -42,6 +42,10 @@
     padding: 5%;
 }
 
+.immutable-app-image-field-thumb {
+    max-width: 300px;
+}
+
 .immutable-app-image-grid .image-name {
     font-weight: bold;
 }

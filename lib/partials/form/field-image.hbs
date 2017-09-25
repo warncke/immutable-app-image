@@ -14,16 +14,28 @@
         </label>
     {{/if}}
 
-    <input type="text" id="{{field.id}}" name="{{field.name}}" class="{{#if field.error}}error{{/if}} {{field.property}} {{field.class}}" {{#if field.placeholder}}placeholder="{{field.placeholder}}"{{/if}} {{#if field.pattern}}pattern="{{field.pattern}}"{{/if}} value="{{default field.value ''}}" {{#if field.readonly}}readonly{{/if}} {{#if field.required}}required{{/if}} {{#if field.inputSize}}size="{{field.inputSize}}"{{/if}} />
-
-    <div class="immutable-app-image-field-controls">
-        <a onclick="ImmutableAppImage.showUploadImage(this, '{{field.imageType}}')">Upload Image</a>
-    </div>
-
-    {{#if field.error}}
-    <div class="error">
-        {{field.error}}
+    {{#if field.record}}
+    <div class="immutable-app-image-field-thumb extra">
+        <div class="immutable-app-image-grid">
+            {{>immutable-app-image-field-thumbnail field.record.data.thumb}}
+        </div>
     </div>
     {{/if}}
+
+    <div class="immutable-app-image-field-input {{#if field.record}}hide{{/if}}">
+
+        <input type="text" id="{{field.id}}" name="{{field.name}}" class="{{#if field.error}}error{{/if}} {{field.property}} {{field.class}}" {{#if field.placeholder}}placeholder="{{field.placeholder}}"{{/if}} {{#if field.pattern}}pattern="{{field.pattern}}"{{/if}} value="{{default field.value ''}}" {{#if field.readonly}}readonly{{/if}} {{#if field.required}}required{{/if}} {{#if field.inputSize}}size="{{field.inputSize}}"{{/if}} />
+
+        <div class="immutable-app-image-field-controls">
+            <a onclick="ImmutableAppImage.showUploadImage(this, '{{field.imageType}}')">Upload Image</a>
+        </div>
+
+        {{#if field.error}}
+        <div class="error">
+            {{field.error}}
+        </div>
+        {{/if}}
+
+    </div>
 
 </div>
