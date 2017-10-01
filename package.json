@@ -3,7 +3,7 @@
   "dependencies": {
     "change-case": "3.0.1",
     "if-defined": "1.0.14",
-    "immutable-app": "0.15.2",
+    "immutable-app": "0.15.4",
     "immutable-core-model-form": "0.9.1",
     "immutable-core-model-view": "0.4.20",
     "immutable-core-service": "0.2.7",
@@ -18,14 +18,14 @@
   "devDependencies": {
     "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
-    "gcsfs": "0.1.20",
-    "immutable-access-control": "0.5.7",
-    "immutable-ai": "0.6.2",
-    "immutable-app-auth": "0.8.19",
+    "gcsfs": "0.1.21",
+    "immutable-access-control": "0.5.8",
+    "immutable-ai": "0.7.0",
+    "immutable-app-auth": "0.8.21",
     "immutable-core": "2.2.5",
-    "immutable-core-model": "3.4.1",
+    "immutable-core-model": "3.4.3",
     "mocha": "3.5.3",
-    "sinon": "3.3.0"
+    "sinon": "4.0.0"
   },
   "directories": {
     "test": "test"
@@ -40,5 +40,5 @@
   "scripts": {
     "test": "mocha"
   },
-  "version": "0.7.5"
+  "version": "0.7.6"
 }
