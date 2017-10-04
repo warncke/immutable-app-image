@@ -23,7 +23,7 @@
     "immutable-ai": "0.7.2",
     "immutable-app-auth": "0.8.31",
     "immutable-core": "2.2.8",
-    "immutable-core-model": "3.4.6",
+    "immutable-core-model": "3.4.7",
     "mocha": "4.0.0",
     "sinon": "4.0.1"
   },
@@ -40,5 +40,5 @@
   "scripts": {
     "test": "mocha --exit"
   },
-  "version": "0.7.18"
+  "version": "0.7.19"
 }
