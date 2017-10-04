@@ -2,8 +2,8 @@
   "author": "Ersun Warncke <ersun.warncke@gmail.com>",
   "dependencies": {
     "change-case": "3.0.1",
-    "if-defined": "1.0.14",
-    "immutable-app": "0.15.8",
+    "if-defined": "1.0.15",
+    "immutable-app": "0.15.9",
     "immutable-core-model-form": "0.9.6",
     "immutable-core-model-view": "0.4.22",
     "immutable-core-service": "0.2.9",
@@ -18,14 +18,14 @@
   "devDependencies": {
     "chai": "4.1.2",
     "chai-as-promised": "7.1.1",
-    "gcsfs": "0.1.21",
-    "immutable-access-control": "0.5.8",
-    "immutable-ai": "0.7.0",
-    "immutable-app-auth": "0.8.28",
+    "gcsfs": "0.1.22",
+    "immutable-access-control": "0.5.10",
+    "immutable-ai": "0.7.2",
+    "immutable-app-auth": "0.8.30",
     "immutable-core": "2.2.7",
     "immutable-core-model": "3.4.6",
-    "mocha": "3.5.3",
-    "sinon": "4.0.0"
+    "mocha": "4.0.0",
+    "sinon": "4.0.1"
   },
   "directories": {
     "test": "test"
@@ -38,7 +38,7 @@
   "name": "immutable-app-image",
   "repository": "warncke/immutable-app-image",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit"
   },
-  "version": "0.7.16"
+  "version": "0.7.17"
 }
