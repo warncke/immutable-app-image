@@ -21,7 +21,7 @@
     "gcsfs": "0.1.26",
     "immutable-access-control": "0.5.13",
     "immutable-ai": "0.8.0",
-    "immutable-app-auth": "0.9.16",
+    "immutable-app-auth": "0.9.17",
     "immutable-core": "2.2.27",
     "immutable-core-model": "3.5.18",
     "mocha": "4.0.1",
@@ -40,5 +40,5 @@
   "scripts": {
     "test": "mocha --exit"
   },
-  "version": "0.7.106"
+  "version": "0.7.107"
 }
