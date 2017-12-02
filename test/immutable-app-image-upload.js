@@ -35,7 +35,7 @@ const connectionParams = {
     user: dbUser,
 }
 
-describe.skip('immutable-app-image-upload', function () {
+describe('immutable-app-image-upload', function () {
 
      var database = new ImmutableDatabaseMariaSQL(connectionParams)
 
@@ -63,8 +63,12 @@ describe.skip('immutable-app-image-upload', function () {
         // set immutable core and model for immutable ai
         ImmutableAI.immutableCore(ImmutableCore)
         ImmutableAI.immutableCoreModel(ImmutableCoreModel)
+        // load image model spec
+        var imageModelSpec = require('../lib/app/image/image.model.js')
+        // remove default thumbnail view
+        delete imageModelSpec.views.default
         // insantiate models
-        imageModel = new ImmutableCoreModel( require('../lib/app/image/image.model.js') )
+        imageModel = new ImmutableCoreModel(imageModelSpec)
         imageProfileModel = new ImmutableCoreModel( require('../lib/app/admin/image-profile/image-profile.model.js') )
         imageTypeModel = new ImmutableCoreModel( require('../lib/app/admin/image-type/image-type.model.js') )
         imageTypeImageProfileModel = new ImmutableCoreModel( require('../lib/app/admin/image-type-image-profile/image-type-image-profile.model.js') )
@@ -82,8 +86,6 @@ describe.skip('immutable-app-image-upload', function () {
         imageTypeServiceSpec.name = 'imageType'
         // initialize image type service
         var imageTypeService = new ImmutableCoreService(imageTypeServiceSpec)
-        // wait for service to initialize
-        await ImmutableCoreService.initializeAll()
         // create new immutable ai instance
         ai = ImmutableAI({
             session: session,
