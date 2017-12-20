@@ -5,7 +5,7 @@
     "if-defined": "1.0.16",
     "immutable-app": "0.15.47",
     "immutable-core-model-form": "0.9.66",
-    "immutable-core-model-view": "0.4.49",
+    "immutable-core-model-view": "0.4.50",
     "immutable-core-service": "0.2.36",
     "immutable-database-mariasql": "1.3.45",
     "immutable-require-valid-optional-object": "0.1.16",
@@ -21,7 +21,7 @@
     "gcsfs": "0.1.28",
     "immutable-access-control": "0.5.13",
     "immutable-ai": "0.8.0",
-    "immutable-app-auth": "0.9.35",
+    "immutable-app-auth": "0.9.36",
     "immutable-core": "2.2.36",
     "immutable-core-model": "3.5.26",
     "mocha": "4.0.1",
@@ -40,5 +40,5 @@
   "scripts": {
     "test": "mocha --exit"
   },
-  "version": "0.7.129"
+  "version": "0.7.130"
 }
