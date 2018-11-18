@@ -5,7 +5,6 @@ const ImmutableAI = require('immutable-ai')
 const ImmutableCore = require('immutable-core')
 const ImmutableCoreModel = require('immutable-core-model')
 const ImmutableCoreService = require('immutable-core-service')
-const ImmutableDatabaseMariaSQL = require('immutable-database-mariasql')
 const Promise = require('bluebird')
 const _ = require('lodash')
 const chai = require('chai')
@@ -28,8 +27,7 @@ const dbPass = process.env.DB_PASS || ''
 const dbUser = process.env.DB_USER || 'root'
 
 const connectionParams = {
-    charset: 'utf8',
-    db: dbName,
+    database: dbName,
     host: dbHost,
     password: dbPass,
     user: dbUser,
@@ -37,7 +35,7 @@ const connectionParams = {
 
 describe('immutable-app-image-upload', function () {
 
-     var database = new ImmutableDatabaseMariaSQL(connectionParams)
+     var mysql
 
      // load test image
      var testImage = fs.readFileSync(path.resolve(__dirname, 'test-image.png'))
@@ -53,8 +51,13 @@ describe('immutable-app-image-upload', function () {
         sessionId: '22222222222222222222222222222222',
     }
 
+    before(async function () {
+        // get mysql connection
+        mysql = await ImmutableCoreModel.createMysqlConnection(connectionParams)
+    })
+
     beforeEach(async function () {
-        sandbox = sinon.sandbox.create()
+        sandbox = sinon.createSandbox()
         // reset global data
         ImmutableCore.reset()
         ImmutableCoreModel.reset()
@@ -73,10 +76,10 @@ describe('immutable-app-image-upload', function () {
         imageTypeModel = new ImmutableCoreModel( require('../lib/app/admin/image-type/image-type.model.js') )
         imageTypeImageProfileModel = new ImmutableCoreModel( require('../lib/app/admin/image-type-image-profile/image-type-image-profile.model.js') )
         // set database for models
-        imageModel.database(database)
-        imageProfileModel.database(database)
-        imageTypeModel.database(database)
-        imageTypeImageProfileModel.database(database)
+        imageModel.mysql(mysql)
+        imageProfileModel.mysql(mysql)
+        imageTypeModel.mysql(mysql)
+        imageTypeImageProfileModel.mysql(mysql)
         // sync models
         await imageModel.sync()
         await imageProfileModel.sync()
@@ -103,6 +106,10 @@ describe('immutable-app-image-upload', function () {
 
     afterEach(function () {
         sandbox.restore()
+    })
+
+    after(async function () {
+        await mysql.close()
     })
 
     it('should save image when it matches image type', async function () {
